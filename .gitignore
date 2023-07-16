@@ -125,3 +125,39 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# VSCode
+.vscode/
+.vs/
+
+# Express specific files and directories
+node_modules/
+dist/
+build/
+
+# Generated SSL certificate files
+cert.pem
+key.pem
+
+# Environment-specific files
+.env
+.env.local
+.env.test
+.env.development
+
+# Logs
+logs/
+*.log
+
+# Dependency directories for package managers
+yarn.lock
+package-lock.json
+.pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# Miscellaneous Express files
+public/uploads/
+
+# IDE and editor specific files
+.idea/
+.vscode/
