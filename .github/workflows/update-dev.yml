@@ -1,0 +1,22 @@
+name: Update Dev Branch
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  update-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update Dev Branch
+        if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+        run: |
+          git fetch origin main
+          git checkout dev
+          git merge --ff-only origin/main
+          git push origin dev
