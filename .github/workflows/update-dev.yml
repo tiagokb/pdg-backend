@@ -20,5 +20,5 @@ jobs:
         run: |
           git fetch origin main
           git checkout dev
-          git merge --ff-only --allow-unrelated-histories origin/main
+          git rebase origin/main
           git push origin dev
