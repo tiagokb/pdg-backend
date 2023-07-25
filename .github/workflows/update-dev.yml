@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: dev # Ensure that the 'dev' branch is checked out
 
       - name: Update Dev Branch
         if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
