@@ -161,3 +161,5 @@ public/uploads/
 # IDE and editor specific files
 .idea/
 .vscode/
+
+secrets.js
