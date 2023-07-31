@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+exports.getType = "pokemon";
+
 module.exports = (sequelize, DataTypes) => {
   class Pokemon extends Model {
     /**
@@ -47,5 +50,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Pokemon',
   });
+
+  // Define instance methods
+  Pokemon.prototype.getType = function () {
+    return this.constructor.name;
+  };
+
   return Pokemon;
 };

@@ -1,3 +1,5 @@
+const { json } = require('express');
+
 const model = require('../models').Pokemon;
 const favoriteModel = require('../models').Favorite;
 const user = require('../models').User;
@@ -79,3 +81,14 @@ exports.list = (req, res) => {
   });
 };
 
+exports.getByExternalId = async (id) => {
+  return await model.findOne({
+    where: {
+      externalId: id
+    }
+  })
+}
+
+exports.insert = async (pokemon) => {
+  return await model.create(pokemon);
+}
