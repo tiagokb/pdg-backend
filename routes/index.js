@@ -8,10 +8,12 @@ router.use(express.json());
 const authRoutes = require('./auth');
 const pokemonsRoutes = require('./pokemons');
 const appearingPoolRoutes = require('./appearingPool');
+const messagingRoutes = require('./messaging');
 
 // Mount the individual routers
 router.use('/auth', authRoutes);
 router.use('/pokemon', pokemonsRoutes);
 router.use('/pool', appearingPoolRoutes);
+router.use('/test', messagingRoutes);
 
 module.exports = router;
