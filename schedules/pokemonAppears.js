@@ -20,6 +20,7 @@ async function addPokemonToDb(pokemon) {
 
         return newModel;
     } catch (error) {
+        console.log(error.message);
         throw new Error('Failed to add Pokemon to the database');
     }
 }

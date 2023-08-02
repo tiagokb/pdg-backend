@@ -6,5 +6,6 @@ const auth = require('../middlewares/auth');
 router.use(auth.verifyToken);
 
 router.get('/check', poolController.checkPool);
+router.get('/executeAction', poolController.executeAction);
 
 module.exports = router;

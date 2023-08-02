@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Favorite, { foreignKey: 'userId' });
-      User.belongsToMany(models.Pokemon, { through: models.Favorite, foreignKey: 'userId' })
+      User.hasMany(models.CapturedPokemon, { foreignKey: 'userId' });
+      User.hasMany(models.UserPoolUsage, { foreignKey: 'userId' });
+      User.belongsToMany(models.Pokemon, { through: models.Favorite, foreignKey: 'userId' });
+      User.belongsToMany(models.Pokemon, { through: models.CapturedPokemon, foreignKey: 'userId' });
+      User.belongsToMany(models.AppearingPool, { through: models.UserPoolUsage, foreignKey: 'userId' });
     }
   }
   User.init({

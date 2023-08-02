@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      AppearingPool.hasMany(models.UserPoolUsage, { foreignKey: 'appearingPoolId' });
+      AppearingPool.belongsToMany(models.User, { through: models.UserPoolUsage, foreignKey: 'appearingPoolId' });
+
+      AppearingPool.hasMany(models.PoolStatistics, { foreignKey: 'appearingPoolId' });
     }
   }
   AppearingPool.init({
