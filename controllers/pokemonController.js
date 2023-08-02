@@ -2,6 +2,7 @@ const { json } = require('express');
 
 const model = require('../models').Pokemon;
 const favoriteModel = require('../models').Favorite;
+const capturedModel = require('../models').capturedModel;
 const user = require('../models').User;
 
 exports.addOrRemove = async (req, res) => {
@@ -58,7 +59,7 @@ exports.addOrRemove = async (req, res) => {
   }
 }
 
-exports.list = (req, res) => {
+exports.listFavorites = (req, res) => {
 
   user.findOne({
     where: {
@@ -68,6 +69,31 @@ exports.list = (req, res) => {
       {
         model: model,
         through: {
+          model: favoriteModel,
+          attributes: []
+        }
+      }
+    ]
+  }).then((user) => {
+    // Now the favorites array will contain only the associated Pokemon models
+    return res.status(200).json(user.Pokemons);
+  })
+  .catch((error) => {
+    return res.status(500).json({ message: "Internal error: " + error.message });
+  });
+};
+
+exports.listCaptured = (req, res) => {
+
+  user.findOne({
+    where: {
+      id: req.userId
+    },
+    include: [
+      {
+        model: model,
+        through: {
+          model: capturedModel,
           attributes: []
         }
       }

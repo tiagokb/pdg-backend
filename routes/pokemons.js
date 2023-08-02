@@ -6,6 +6,7 @@ const auth = require('../middlewares/auth');
 router.use(auth.verifyToken);
 
 router.post('/addOrRemove', pokemonController.addOrRemove);
-router.get('/list', pokemonController.list);
+router.get('/listFavorites', pokemonController.listFavorites);
+router.get('/listCaptured', pokemonController.listCaptured);
 
 module.exports = router;
