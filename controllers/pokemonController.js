@@ -94,7 +94,7 @@ exports.listCaptured = (req, res) => {
         model: model,
         through: {
           model: capturedModel,
-          attributes: []
+          attributes: ['quantity']
         }
       }
     ]
