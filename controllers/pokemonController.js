@@ -1,9 +1,9 @@
-const { json } = require('express');
-
-const model = require('../models').Pokemon;
-const favoriteModel = require('../models').Favorite;
-const capturedModel = require('../models').capturedModel;
-const user = require('../models').User;
+const {
+  Favorite,
+  CapturedPokemon,
+  User,
+  Pokemon
+} = require('../models');
 
 exports.addOrRemove = async (req, res) => {
 
@@ -34,14 +34,14 @@ exports.addOrRemove = async (req, res) => {
   }
 
   try {
-    const [pokemonResult, created] = await model.findOrCreate({
+    const [pokemonResult, created] = await Pokemon.findOrCreate({
       where: {
         externalId: externalId
       },
       defaults: pokemon // The data to be created if the record is not found
     });
 
-    const [favorite, favoriteCreated] = await favoriteModel.findOrCreate({
+    const [favorite, favoriteCreated] = await Favorite.findOrCreate({
       where: {
         userId: req.userId,
         pokemonId: pokemonResult.id
@@ -55,21 +55,21 @@ exports.addOrRemove = async (req, res) => {
       return res.status(200).json({ message: pokemonResult.name + " removido dos favoritos" });
     }
   } catch (error) {
-    return res.status(500).json({ message: "Internal error: " + error.message });
+    return res.status(500).json({ error });
   }
 }
 
 exports.listFavorites = (req, res) => {
 
-  user.findOne({
+  User.findOne({
     where: {
       id: req.userId
     },
     include: [
       {
-        model: model,
+        model: Pokemon,
         through: {
-          model: favoriteModel,
+          model: Favorite,
           attributes: []
         }
       }
@@ -85,15 +85,15 @@ exports.listFavorites = (req, res) => {
 
 exports.listCaptured = (req, res) => {
 
-  user.findOne({
+  User.findOne({
     where: {
       id: req.userId
     },
     include: [
       {
-        model: model,
+        model: Pokemon,
         through: {
-          model: capturedModel,
+          model: CapturedPokemon,
           attributes: ['quantity']
         }
       }
@@ -108,7 +108,7 @@ exports.listCaptured = (req, res) => {
 };
 
 exports.getByExternalId = async (id) => {
-  return await model.findOne({
+  return await Pokemon.findOne({
     where: {
       externalId: id
     }
@@ -116,5 +116,5 @@ exports.getByExternalId = async (id) => {
 }
 
 exports.insert = async (pokemon) => {
-  return await model.create(pokemon);
+  return await Pokemon.create(pokemon);
 }

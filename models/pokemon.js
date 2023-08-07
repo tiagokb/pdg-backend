@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Pokemon.belongsToMany(models.User, { through: models.Favorite, foreignKey: 'pokemonId' })
-      Pokemon.belongsToMany(models.User, { through: models.CapturedPokemon, foreignKey: 'pokemonId' })
+      Pokemon.belongsToMany(models.User, { through: models.Favorite, foreignKey: 'pokemonId', as: 'FavoriteUsers' })
+      Pokemon.belongsToMany(models.User, { through: models.CapturedPokemon, foreignKey: 'pokemonId', as: 'CapturedPokemonUsers' })
     }
   }
   Pokemon.init({
