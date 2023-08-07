@@ -21,3 +21,17 @@ exports.playerCatchesPokemon = (chanceToCatch) => {
     const randomNum = Math.round(Math.random() * 100) / 100;
     return randomNum <= chanceToCatch;
 }
+
+exports.paginate = (list, resultsPerPage) => {
+    const totalPages = Math.ceil(list.length / resultsPerPage);
+    const paginatedTokens = [];
+  
+    for (let page = 1; page <= totalPages; page++) {
+      const startIndex = (page - 1) * resultsPerPage;
+      const endIndex = startIndex + resultsPerPage;
+      const tokensPage = list.slice(startIndex, endIndex);
+      paginatedTokens.push(tokensPage);
+    }
+  
+    return { totalPages, tokens: paginatedTokens };
+  };
