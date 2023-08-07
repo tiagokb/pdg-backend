@@ -22,7 +22,7 @@ exports.register = (req, res) => {
     }).then( (User) => {
         return res.status(201).json(User)
     }).catch( (error) => {
-        return res.status(500).json({ message: "Internal error: " . error.message })
+        return res.status(500).json({ message: error.message })
     });
 }
 
