@@ -57,12 +57,11 @@ async function sendGlobalNotification(pokemon) {
 
         if (response.failureCount > 0) {
             response.responses.forEach((resp, idx) => {
-
                 if (resp.success) {
                     successCount++
                 } else {
                     failureCount++
-                    failedTokens.push(tokens[idx]);
+                    failedTokens.push([tokens[idx], resp.error]);
                 }
             });
           }
@@ -89,7 +88,7 @@ async function sendGlobalNotification(pokemon) {
                     successCount++
                 } else {
                     failureCount++
-                    failedTokens.push(tokens[idx]);
+                    failedTokens.push([tokens[idx], resp.error]);
                 }
             });
           }
